@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Description>Fria2.LocalDb Class Library</Description>
+    <VersionPrefix>4.6.0</VersionPrefix>
+    <Authors>Daimrle AG</Authors>
+    <TargetFramework>net451</TargetFramework>
+    <AssemblyName>Fria2.LocaDb</AssemblyName>
+    <PackageId>Fria2.LocaDb</PackageId>
+    <DebugType>Full</DebugType>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Confifu.Logging.Microsoft" Version="1.0.0" />
+    <PackageReference Include="Dapper" Version="1.39" />
+    <PackageReference Include="Equals.Fody" Version="1.6.2" />
+    <PackageReference Include="Fody" Version="1.29.4" />
+    <PackageReference Include="LanguageExt.Core" Version="2.0.38-beta" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.0.1" />
+    <PackageReference Include="ToString.Fody" Version="1.7.3" />
+    <PackageReference Include="With.Fody" Version="0.7.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Data" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  
+</Project>
