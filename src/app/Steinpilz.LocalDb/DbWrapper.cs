@@ -180,16 +180,16 @@ namespace Steinpilz.LocalDb
         public bool UseSchemaHashSuffix { get; }
 
         public DbParams(
-            ConnectionString masterConnectionString,
-            DbSchema dbSchema,
-            string dbName,
-            bool addSchemaHashToDbName
+            ConnectionString connectionString,
+            DbSchema databaseSchema,
+            string databaseName,
+            bool useSchemaHashSuffix
             )
         {
-            ConnectionString = masterConnectionString;
-            DatabaseSchema = dbSchema;
-            DatabaseName = dbName;
-            UseSchemaHashSuffix = addSchemaHashToDbName;
+            ConnectionString = connectionString;
+            DatabaseSchema = databaseSchema;
+            DatabaseName = databaseName;
+            UseSchemaHashSuffix = useSchemaHashSuffix;
         }
 
         public DbParams WithConnectionString(ConnectionString connString) => this;
@@ -208,7 +208,7 @@ namespace Steinpilz.LocalDb
             => new ConnectionString(value);
 
         public static ConnectionString LocalDb(LocalDbVersion version)
-            => new ConnectionString($@"DataSource=(LocalDb)\{(string)version};Integrated Security=SSPI;");
+            => new ConnectionString($@"Data Source=(LocalDb)\{(string)version};Integrated Security=SSPI;");
 
         public ConnectionString ForDatabase(string dbName)
         {

@@ -77,4 +77,16 @@ PRINT N'Creating [Survey].[UIQRNOSC]...';
                 ));
         }
     }
+
+    public class DbParamsTests
+    {
+        [Fact]
+        public void with_methods_work()
+        {
+            var p = new DbParams(ConnectionString.Custom("x"), DbSchema.FromSqlScript(SqlSchemaScript.Create("")), "test", false);
+
+
+            p.WithConnectionString(ConnectionString.Custom("a")).ConnectionString.ShouldBe(ConnectionString.Custom("a"));
+        }
+    }
 }
