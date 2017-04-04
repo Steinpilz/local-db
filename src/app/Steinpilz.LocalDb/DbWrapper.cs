@@ -18,7 +18,7 @@ namespace Steinpilz.LocalDb
         readonly DbParams @params;
 
         string MasterConnectionString { get; }
-        string ConnectionString { get; }
+        public string ConnectionString { get; private set; }
 
         public DbWrapper(DbParams @params)
         {

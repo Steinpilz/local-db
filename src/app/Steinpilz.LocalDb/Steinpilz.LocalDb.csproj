@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>Fria2.LocalDb Class Library</Description>
+    <Description>Steinpilz.LocalDb Class Library</Description>
     <VersionPrefix>4.6.0</VersionPrefix>
-    <Authors>Daimrle AG</Authors>
+    <Authors>Steinpilz</Authors>
     <TargetFramework>net451</TargetFramework>
-    <AssemblyName>Fria2.LocaDb</AssemblyName>
-    <PackageId>Fria2.LocaDb</PackageId>
+    <AssemblyName>Steinpilz.LocalDb</AssemblyName>
+    <PackageId>Steinpilz.LocalDb</PackageId>
     <DebugType>Full</DebugType>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
