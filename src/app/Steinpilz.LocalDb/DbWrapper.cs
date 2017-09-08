@@ -20,19 +20,24 @@ namespace Steinpilz.LocalDb
         string MasterConnectionString { get; }
         public string ConnectionString { get; private set; }
 
+        string hash;
+        string dbName;
+
         public DbWrapper(DbParams @params)
         {
             this.@params = @params;
 
             MasterConnectionString = (string)@params.ConnectionString.ForDatabase("master");
-            ConnectionString = (string)@params.ConnectionString.ForDatabase(@params.DatabaseName);
+
+            hash = HashSum((string)@params.DatabaseSchema.SqlScript);
+            dbName = @params.UseSchemaHashSuffix ? $"{@params.DatabaseName}-{hash}" : @params.DatabaseName;
+            ConnectionString = (string)@params.ConnectionString.ForDatabase(dbName);
         }
 
         public void DeploySchema()
         {
-            var script = this.@params.DatabaseSchema.SqlScript.WithDatabaseName(this.@params.DatabaseName);
-
-            var hash = HashSum((string)script);
+            var script = this.@params.DatabaseSchema.SqlScript.WithDatabaseName(dbName);
+            
             if (AlreadyDeployed(hash))
                 return;
 

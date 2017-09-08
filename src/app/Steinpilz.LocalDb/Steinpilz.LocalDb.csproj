@@ -13,11 +13,11 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.39" />
-    <PackageReference Include="Equals.Fody" Version="1.6.2" PrivateAssets="All" />
-    <PackageReference Include="Fody" Version="1.29.4" PrivateAssets="All" />
+    <PackageReference Include="Equals.Fody" Version="1.7.1" PrivateAssets="All" />
+    <PackageReference Include="Fody" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="LanguageExt.Core" Version="2.0.60" />
-    <PackageReference Include="ToString.Fody" Version="1.7.3" PrivateAssets="All" />
-    <PackageReference Include="With.Fody" Version="0.7.0" PrivateAssets="All" />
+    <PackageReference Include="ToString.Fody" Version="1.8.0" PrivateAssets="All" />
+    <PackageReference Include="With.Fody" Version="0.8.0" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Configuration" />

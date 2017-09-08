@@ -1,8 +1,7 @@
 // include Fake lib
 #r @"..\packages\FAKE\tools\FakeLib.dll"
-//#r @"..\packages\Steinpilz.DevFlow.Fake\lib\net451\Steinpilz.DevFlow.Fake.dll"
-#load @"c:\data\work\github\fake-build\src\app\Steinpilz.DevFlow.Fake\lib.fs"
-
+#r @"..\packages\Steinpilz.DevFlow.Fake\tools\Steinpilz.DevFlow.Fake.Lib.dll"
+//#load @"c:\data\work\github\fake-build\src\app\Steinpilz.DevFlow.Fake\lib.fs"
 
 open Fake
 open Steinpilz.DevFlow.Fake 
@@ -17,3 +16,5 @@ Lib.setup(fun p ->
             }
     }
 )
+
+RunTargetOrDefault "Watch"
