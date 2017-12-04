@@ -10,12 +10,15 @@ using Dapper;
 using static LanguageExt.Prelude;
 using System.Threading;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Steinpilz.LocalDb
 {
     public class DbWrapper
     {
         readonly DbParams @params;
+        private readonly ILogger logger;
 
         string MasterConnectionString { get; }
         public string ConnectionString { get; private set; }
@@ -23,10 +26,12 @@ namespace Steinpilz.LocalDb
         string hash;
         string dbName;
 
-        public DbWrapper(DbParams @params)
+        public DbWrapper(DbParams @params) : this(@params, NullLogger.Instance) { }
+
+        public DbWrapper(DbParams @params, ILogger logger)
         {
             this.@params = @params;
-
+            this.logger = logger;
             MasterConnectionString = (string)@params.ConnectionString.ForDatabase("master");
 
             hash = HashSum((string)@params.DatabaseSchema.SqlScript);
@@ -83,7 +88,7 @@ namespace Steinpilz.LocalDb
                 }
                 catch (Exception ex)
                 {
-
+                    this.logger.LogCritical(new EventId(), ex, "Error by setting deployed mark");
                 }
             }
         }
@@ -102,7 +107,7 @@ namespace Steinpilz.LocalDb
                     }
                     catch (Exception ex)
                     {
-                        // silence
+                        this.logger.LogWarning(new EventId(), ex, $"Error by running script: [{command}]");
                     }
                 }
             }
