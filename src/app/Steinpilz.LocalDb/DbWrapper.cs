@@ -229,8 +229,11 @@ namespace Steinpilz.LocalDb
 
             if(!string.IsNullOrEmpty(connectionStringBuilder.AttachDBFilename))
             {
-                connectionStringBuilder.AttachDBFilename = connectionStringBuilder.AttachDBFilename
-                    .Replace("{database}", dbName);
+                if (dbName == "master")
+                    connectionStringBuilder.Remove("AttachDBFilename");
+                else 
+                    connectionStringBuilder.AttachDBFilename = connectionStringBuilder.AttachDBFilename
+                        .Replace("{database}", dbName);
             }
 
             return new ConnectionString(connectionStringBuilder.ConnectionString);

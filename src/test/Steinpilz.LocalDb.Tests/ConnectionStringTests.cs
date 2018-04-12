@@ -27,5 +27,18 @@ namespace Steinpilz.LocalDb.Tests
             var raw = (string)namedConnectionString;
             raw.ShouldContain(@"Data Source=db.stein-pilz.com,1434;AttachDbFilename=R:\local-db\test-db.mdf;Initial Catalog=test-db;User ID=testrunner;Password=testrunner;Connect Timeout=600");
         }
+
+
+        [Fact]
+        public void it_reset_Attached_db_file_name_For_master()
+        {
+            var connectionString = ConnectionString.Custom(
+                "Data Source=db.stein-pilz.com,1434;User Id=testrunner;Password=testrunner;Connection Timeout=600;AttachDbFilename=R:\\local-db\\{database}.mdf");
+
+            var namedConnectionString = connectionString.ForDatabase("master");
+
+            var raw = (string)namedConnectionString;
+            raw.ShouldContain(@"Data Source=db.stein-pilz.com,1434;Initial Catalog=master;User ID=testrunner;Password=testrunner;Connect Timeout=600");
+        }
     }
 }
