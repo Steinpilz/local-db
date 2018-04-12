@@ -227,6 +227,12 @@ namespace Steinpilz.LocalDb
                 InitialCatalog = dbName
             };
 
+            if(!string.IsNullOrEmpty(connectionStringBuilder.AttachDBFilename))
+            {
+                connectionStringBuilder.AttachDBFilename = connectionStringBuilder.AttachDBFilename
+                    .Replace("{database}", dbName);
+            }
+
             return new ConnectionString(connectionStringBuilder.ConnectionString);
         }
     }
