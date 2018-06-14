@@ -202,10 +202,17 @@ namespace Steinpilz.LocalDb
             UseSchemaHashSuffix = useSchemaHashSuffix;
         }
 
-        public DbParams WithConnectionString(ConnectionString connString) => this;
-        public DbParams WithDatabaseSchema(DbSchema dbSchema) => this;
-        public DbParams WithDatabaseName(string databaseName) => this;
-        public DbParams WithUseSchemaHashSuffix(bool useSchemaHashSuffix) => this;
+        public DbParams WithConnectionString(ConnectionString connString) =>
+            new DbParams(connString, DatabaseSchema, DatabaseName, UseSchemaHashSuffix);
+
+        public DbParams WithDatabaseSchema(DbSchema dbSchema) =>
+            new DbParams(ConnectionString, dbSchema, DatabaseName, UseSchemaHashSuffix);
+
+        public DbParams WithDatabaseName(string databaseName) =>
+            new DbParams(ConnectionString, DatabaseSchema, databaseName, UseSchemaHashSuffix);
+
+        public DbParams WithUseSchemaHashSuffix(bool useSchemaHashSuffix) =>
+            new DbParams(ConnectionString, DatabaseSchema, DatabaseName, useSchemaHashSuffix);
     }
 
     public class ConnectionString : NewType<ConnectionString, string>

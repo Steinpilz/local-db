@@ -6,7 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{CC408C3F-1C0B-498C-A043-DF8DD3F7FDE8}"
 	ProjectSection(SolutionItems) = preProject
 		.env = .env
+		.gitignore = .gitignore
+		build.bat = build.bat
 		scripts\build.fsx = scripts\build.fsx
+		paket.dependencies = paket.dependencies
+		paket.lock = paket.lock
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steinpilz.LocalDb", "src\app\Steinpilz.LocalDb\Steinpilz.LocalDb.csproj", "{5D93AEEF-17D5-4C17-B3A1-FB82B56A5FC6}"

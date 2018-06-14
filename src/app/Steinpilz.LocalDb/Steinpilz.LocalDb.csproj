@@ -14,13 +14,16 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.39" />
-    <PackageReference Include="Equals.Fody" Version="1.8.3" PrivateAssets="All" />
-    <PackageReference Include="Fody" Version="2.5.0" PrivateAssets="All" />
+    <PackageReference Include="Equals.Fody" Version="1.9.0" PrivateAssets="All" />
+    <PackageReference Include="Fody" Version="3.0.4" PrivateAssets="All" />
     <PackageReference Include="LanguageExt.Core" Version="2.0.60" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.2" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.5.0" />
-    <PackageReference Include="With.Fody" Version="0.8.0" PrivateAssets="All" />
   </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Data.SqlClient" Version="4.5.0" />
+  </ItemGroup>
+  
   <ItemGroup>
     <Reference Include="System.Configuration" />
     <Reference Include="System.ServiceModel" />
