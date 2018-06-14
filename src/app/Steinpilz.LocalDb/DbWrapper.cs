@@ -60,7 +60,7 @@ namespace Steinpilz.LocalDb
 
         protected virtual void SetDeployedMark(string hash)
         {
-            for (;;)
+            for (var tr = 0; tr < 10; tr++)
             {
                 try
                 {
@@ -107,6 +107,7 @@ namespace Steinpilz.LocalDb
                     }
                     catch (Exception ex)
                     {
+                        //throw;
                         this.logger.LogWarning(new EventId(), ex, $"Error by running script: [{command}]");
                     }
                 }
@@ -181,7 +182,6 @@ namespace Steinpilz.LocalDb
     }
 
     [Equals]
-    [ToString]
     public class DbParams
     {
         public ConnectionString ConnectionString { get; }
@@ -231,9 +231,12 @@ namespace Steinpilz.LocalDb
             {
                 if (dbName == "master")
                     connectionStringBuilder.Remove("AttachDBFilename");
-                else 
+                else
+                {
                     connectionStringBuilder.AttachDBFilename = connectionStringBuilder.AttachDBFilename
                         .Replace("{database}", dbName);
+                    connectionStringBuilder.Remove("Initial Catalog");
+                }
             }
 
             return new ConnectionString(connectionStringBuilder.ConnectionString);
@@ -251,7 +254,6 @@ namespace Steinpilz.LocalDb
     }
 
     [Equals]
-    [ToString]
     public class DbSchema
     {
         public SqlSchemaScript SqlScript { get; private set; }

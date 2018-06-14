@@ -153,3 +153,7 @@ deploy/
 .fake
 .artifacts
 project.lock.json
+
+db.sql
+*ncrunch*
+paket-files

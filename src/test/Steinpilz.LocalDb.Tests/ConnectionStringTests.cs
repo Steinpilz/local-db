@@ -25,7 +25,7 @@ namespace Steinpilz.LocalDb.Tests
             var namedConnectionString = connectionString.ForDatabase("test-db");
 
             var raw = (string)namedConnectionString;
-            raw.ShouldContain(@"Data Source=db.stein-pilz.com,1434;AttachDbFilename=R:\local-db\test-db.mdf;Initial Catalog=test-db;User ID=testrunner;Password=testrunner;Connect Timeout=600");
+            raw.ShouldContain(@"Data Source=db.stein-pilz.com,1434;AttachDbFilename=R:\local-db\test-db.mdf;User ID=testrunner;Password=testrunner;Connect Timeout=600");
         }
 
 

@@ -9,6 +9,7 @@ open Steinpilz.DevFlow.Fake
 Lib.setup(fun p -> 
     { p with 
         PublishProjects = !!"src/app/**/*.csproj"
+        UseDotNetCliToTest = true
         // UseDotNetCliToPack = true Temporary pack with msbuild since dotnet cli build not working with Fody
         NuGetFeed = 
             { p.NuGetFeed with 
