@@ -3,9 +3,7 @@
     <Description>Steinpilz.LocalDb Class Library</Description>
     <VersionPrefix>1.0.0</VersionPrefix>
     <Authors>Steinpilz</Authors>
-    <TargetFrameworks>net451;netstandard2.0</TargetFrameworks>
-    <AssemblyName>Steinpilz.LocalDb</AssemblyName>
-    <PackageId>Steinpilz.LocalDb</PackageId>
+    <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
     <DebugType>Full</DebugType>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
@@ -13,23 +11,15 @@
     <FodyExecutedWeavers>Equals;</FodyExecutedWeavers>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.39" />
-    <PackageReference Include="Equals.Fody" Version="1.9.0" PrivateAssets="All" />
-    <PackageReference Include="Fody" Version="3.0.4" PrivateAssets="All" />
-    <PackageReference Include="LanguageExt.Core" Version="2.0.60" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.2" />
-  </ItemGroup>
-  
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.Data.SqlClient" Version="4.5.0" />
+    <PackageReference Include="Dapper" Version="1.60.6" />
+    <PackageReference Include="Equals.Fody" Version="1.9.3" PrivateAssets="All" />
+    <PackageReference Include="Fody" Version="3.3.5" PrivateAssets="All" />
+    <PackageReference Include="LanguageExt.Core" Version="3.1.24" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
   </ItemGroup>
   
   <ItemGroup>
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Data" />
-    <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   

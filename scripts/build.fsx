@@ -10,7 +10,7 @@ Lib.setup(fun p ->
     { p with 
         PublishProjects = !!"src/app/**/*.csproj"
         UseDotNetCliToTest = true
-        // UseDotNetCliToPack = true Temporary pack with msbuild since dotnet cli build not working with Fody
+        UseDotNetCliToPack = true 
         NuGetFeed = 
             { p.NuGetFeed with 
                 ApiKey = environVarOrFail <| "NUGET_API_KEY" |> Some
