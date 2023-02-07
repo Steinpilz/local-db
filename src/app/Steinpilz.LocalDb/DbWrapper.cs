@@ -213,6 +213,9 @@ namespace Steinpilz.LocalDb
 
         public DbParams WithUseSchemaHashSuffix(bool useSchemaHashSuffix) =>
             new DbParams(ConnectionString, DatabaseSchema, DatabaseName, useSchemaHashSuffix);
+
+        public static bool operator ==(DbParams left, DbParams right) => Operator.Weave(left, right);
+        public static bool operator !=(DbParams left, DbParams right) => Operator.Weave(left, right);
     }
 
     public class ConnectionString : NewType<ConnectionString, string>
@@ -270,6 +273,8 @@ namespace Steinpilz.LocalDb
         public static DbSchema FromSqlScript(SqlSchemaScript sql)
             => new DbSchema { SqlScript = sql };
 
+        public static bool operator ==(DbSchema left, DbSchema right) => Operator.Weave(left, right);
+        public static bool operator !=(DbSchema left, DbSchema right) => Operator.Weave(left, right);
     }
 
     public class SqlSchemaScript : NewType<SqlSchemaScript, string>

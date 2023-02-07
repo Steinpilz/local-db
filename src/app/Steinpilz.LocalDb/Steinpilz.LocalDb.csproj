@@ -13,8 +13,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.60.6" />
-    <PackageReference Include="Equals.Fody" Version="1.9.3" PrivateAssets="All" />
-    <PackageReference Include="Fody" Version="3.3.5" PrivateAssets="All" />
+    <PackageReference Include="Fody" Version="6.6.0" PrivateAssets="All" />
+    <PackageReference Include="Equals.Fody" Version="4.0.2" PrivateAssets="All" />
     <PackageReference Include="LanguageExt.Core" Version="3.0.28" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
