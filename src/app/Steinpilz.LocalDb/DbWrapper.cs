@@ -42,15 +42,20 @@ namespace Steinpilz.LocalDb
         public void DeploySchema()
         {
             var script = this.@params.DatabaseSchema.SqlScript.WithDatabaseName(dbName);
-            
+
             if (AlreadyDeployed(hash))
                 return;
 
             var commands = script.ExtractValuableCommands();
 
-            RunScripts(commands.Select(x => (string)x));
+            // Only set the deployed-mark when every command succeeded; otherwise a partial deploy
+            // (e.g. a transient SQL error during one CREATE TABLE) would leave the DB in a state
+            // where AlreadyDeployed() returns true but the schema is missing tables, breaking
+            // every subsequent test run on this LocalDb instance until manual cleanup.
+            var allSucceeded = RunScripts(commands.Select(x => (string)x));
 
-            SetDeployedMark(hash);
+            if (allSucceeded)
+                SetDeployedMark(hash);
         }
 
         public void ClearTables(IEnumerable<string> tables)
@@ -94,8 +99,9 @@ namespace Steinpilz.LocalDb
         }
 
 
-        private void RunScripts(IEnumerable<string> commands)
+        protected virtual bool RunScripts(IEnumerable<string> commands)
         {
+            var allSucceeded = true;
             using (var conn = new SqlConnection(MasterConnectionString))
             {
                 conn.Open();
@@ -107,11 +113,12 @@ namespace Steinpilz.LocalDb
                     }
                     catch (Exception ex)
                     {
-                        //throw;
+                        allSucceeded = false;
                         this.logger.LogWarning(new EventId(), ex, $"Error by running script: [{command}]");
                     }
                 }
             }
+            return allSucceeded;
         }
 
         protected string ClearTablesScript(IEnumerable<string> tables)
@@ -144,7 +151,7 @@ namespace Steinpilz.LocalDb
             }
         }
 
-        private bool AlreadyDeployed(string hash)
+        protected virtual bool AlreadyDeployed(string hash)
         {
             try
             {
