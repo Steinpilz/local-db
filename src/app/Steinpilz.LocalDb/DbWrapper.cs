@@ -42,15 +42,30 @@ namespace Steinpilz.LocalDb
         public void DeploySchema()
         {
             var script = this.@params.DatabaseSchema.SqlScript.WithDatabaseName(dbName);
-            
+
             if (AlreadyDeployed(hash))
                 return;
+
+            // On a full SQL Server (Linux containers can't use LocalDB), the
+            // dacpac-generated _Create.sql wraps CREATE DATABASE in a SQLCMD
+            // expression that may resolve to nothing or fail silently when run
+            // through Dapper. Pre-create the DB explicitly so subsequent
+            // DDL has a target even if the dacpac chunk no-ops.
+            EnsureDatabaseExists(dbName);
 
             var commands = script.ExtractValuableCommands();
 
             RunScripts(commands.Select(x => (string)x));
 
             SetDeployedMark(hash);
+        }
+
+        private void EnsureDatabaseExists(string dbName)
+        {
+            using (var conn = new SqlConnection(MasterConnectionString))
+            {
+                conn.Execute($"IF DB_ID(N'{dbName.Replace("'", "''")}') IS NULL CREATE DATABASE [{dbName.Replace("]", "]]")}]");
+            }
         }
 
         public void ClearTables(IEnumerable<string> tables)
@@ -286,6 +301,12 @@ namespace Steinpilz.LocalDb
 
         public static SqlSchemaScript Create(string sqlScript)
         {
+            // UTF-8 BOM (U+FEFF) at script start makes the first GO-delimited
+            // chunk's leading SQL statement fail to parse on SQL Server when
+            // sent via Dapper. Dacpac _Create.sql is generated BOM-prefixed.
+            if (!string.IsNullOrEmpty(sqlScript) && sqlScript[0] == '﻿')
+                sqlScript = sqlScript.Substring(1);
+
             return new SqlSchemaScript(RemoveSetVars(sqlScript).Replace("$(__IsSqlCmdEnabled)", "True"));
         }
 
